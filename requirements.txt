@@ -1,0 +1,29 @@
+# ============================================================
+#  BLINKIT PROJECT — Python Requirements
+#  File: requirements.txt
+#
+#  HOW TO INSTALL EVERYTHING AT ONCE:
+#  Open Terminal / Command Prompt and run:
+#
+#      pip install -r requirements.txt
+#
+#  This installs all the libraries you need!
+# ============================================================
+
+# Core data tools
+pandas>=1.5.0           # Load, clean, and manipulate CSV data
+numpy>=1.23.0           # Math and array operations
+
+# Visualizations
+matplotlib>=3.6.0       # Draw charts and graphs
+seaborn>=0.12.0         # Prettier charts (uses matplotlib)
+
+# Machine Learning
+scikit-learn>=1.2.0     # KMeans clustering + Random Forest + metrics
+
+# Web Dashboard
+streamlit>=1.20.0       # Interactive web app (the dashboard)
+
+# Optional but useful
+openpyxl>=3.1.0         # Read/write Excel files if needed
+plotly>=5.13.0          # Interactive charts (for Streamlit)
