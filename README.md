@@ -13,7 +13,7 @@
   |
   <a href="#architecture">Architecture</a>
   |
-  <a href="#results">Results</a>
+  <a href="#key-results">Results</a>
   |
   <a href="#quick-start">Quick Start</a>
   |
@@ -42,7 +42,7 @@
       <p>
         BigMart Sales Forecasting is a complete data science project that takes raw retail data,
         learns from 20 months of sales history, and predicts future sales with 94% accuracy.
-        It also segments customers into actionable groups and gives an automated business decision plan.
+        It also segments customers into actionable groups and delivers an automated business decision plan.
       </p>
       <p>
         This repository combines data preprocessing, EDA, KMeans clustering, a Random Forest forecasting model,
@@ -91,7 +91,7 @@
 
 ## Architecture
 
-mermaid
+```mermaid
 flowchart LR
   subgraph Data["Raw Data Layer"]
     CSV["9 CSV Files\n(Orders, Customers,\nProducts, Delivery...)"]
@@ -120,18 +120,18 @@ flowchart LR
   DS --> DB
   VZ --> TAB
   DA --> SQL
-
+```
 
 ### Pipeline Run Order
 
-text
+```text
 01_data_analysis.py          -> load, clean, merge all 9 CSV files
 03_customer_segmentation.py  -> KMeans clustering on RFM features
 02_visualizations.py         -> generate 7 PNG chart files
 04_sales_forecast.py         -> train Random Forest, save model.pkl
 05_decision_system.py        -> test decision engine with scenarios
 06_streamlit_app.py          -> launch interactive dashboard
-
+```
 
 ---
 
@@ -140,7 +140,7 @@ text
 9 CSV files from a Blinkit (quick commerce) dataset:
 
 | File | Rows | Key Columns |
-|---|---|---|
+| --- | --- | --- |
 | blinkit_orders.csv | 5,000 | order_id, customer_id, order_date, order_total |
 | blinkit_customers.csv | 2,500 | customer_id, segment, area, avg_order_value |
 | blinkit_products.csv | 268 | product_id, category, brand, price, mrp |
@@ -150,21 +150,21 @@ text
 | blinkit_customer_feedback.csv | 5,000 | rating, sentiment, feedback_text |
 | blinkit_inventoryNew.csv | 18,105 | product_id, stock_received, damaged_stock |
 
-*Date range:* March 2023 – November 2024 (20 months)
+*Date range: March 2023 – November 2024 (20 months)*
 
 ---
 
 ## Key Results
 
 | Metric | Value |
-|---|---|
+| --- | --- |
 | Total Revenue Analysed | Rs. 49,72,415 |
 | Total Orders | 5,000 |
 | Total Customers | 2,500 |
 | Best Category | Dairy & Breakfast |
 | ML Model | Random Forest Regressor |
-| R² Score | *0.9425* (94% accuracy) |
-| MAE | *2.92 units* per month |
+| R² Score | 0.9425 (94% accuracy) |
+| MAE | 2.92 units per month |
 | On-Time Delivery | 69.4% |
 | Avg Customer Rating | 3.34 / 5 |
 
@@ -175,7 +175,7 @@ text
 ### Features Used (Inputs)
 
 | Feature | Description |
-|---|---|
+| --- | --- |
 | year, month, quarter | Time period of forecast |
 | category_enc | Product category encoded as number |
 | lag_1_qty | Units sold last month |
@@ -187,17 +187,17 @@ text
 
 ### Target (Output)
 
-total_qty — Units to sell next month per category
+`total_qty` — Units to sell next month per category
 
 ### Model Performance
 
-text
+```text
 Algorithm   : Random Forest Regressor (200 trees, max_depth=10)
 R² Score    : 0.9425   (94.25% of variation explained)
 MAE         : 2.92     (average error of ~3 units per month)
 RMSE        : 3.61
 Cross-Val   : 5-fold, consistent performance
-
+```
 
 ---
 
@@ -206,11 +206,11 @@ Cross-Val   : 5-fold, consistent performance
 RFM (Recency, Frequency, Monetary) features built for 2,500 customers, then grouped using KMeans (K=4):
 
 | Segment | Count | Avg Spend | Avg Orders | Strategy |
-|---|---|---|---|---|
-| Champions | 517 | Rs.4,520 | 4.0 | VIP offers, referral program |
-| Loyal Customers | 439 | Rs.2,760 | 1.6 | Loyalty points, cross-sell |
-| At-Risk Customers | 765 | Rs.1,380 | 2.1 | Win-back campaign |
-| New Customers | 451 | Rs.818 | 1.4 | Onboarding discount |
+| --- | --- | --- | --- | --- |
+| Champions | 517 | Rs. 4,520 | 4.0 | VIP offers, referral program |
+| Loyal Customers | 439 | Rs. 2,760 | 1.6 | Loyalty points, cross-sell |
+| At-Risk Customers | 765 | Rs. 1,380 | 2.1 | Win-back campaign |
+| New Customers | 451 | Rs. 818 | 1.4 | Onboarding discount |
 
 ---
 
@@ -218,29 +218,29 @@ RFM (Recency, Frequency, Monetary) features built for 2,500 customers, then grou
 
 Takes the ML prediction and outputs a complete business action plan:
 
-text
+```text
 INPUT:  Category = Dairy & Breakfast
         Predicted Sales = 520 units
         Current Stock   = 300 units
-        Avg Price       = Rs.120
-        Cost Price      = Rs.70
+        Avg Price       = Rs. 120
+        Cost Price      = Rs. 70
 
 OUTPUT:
-  STOCK    -> ORDER 272 MORE UNITS immediately (URGENT)
-  PRICING  -> NO DISCOUNT — high demand, charge full price
-  DELIVERY -> MONITOR DELIVERY — 88% on-time, slightly below target
-  MARKETING-> MAINTAIN BUDGET — ROAS 3.5x is acceptable
-  PROFIT   -> Expected Rs.26,000 | Revenue change +73.3%
+  STOCK     -> ORDER 272 MORE UNITS immediately (URGENT)
+  PRICING   -> NO DISCOUNT — high demand, charge full price
+  DELIVERY  -> MONITOR DELIVERY — 88% on-time, slightly below target
+  MARKETING -> MAINTAIN BUDGET — ROAS 3.5x is acceptable
+  PROFIT    -> Expected Rs. 26,000 | Revenue change +73.3%
+```
 
-
-The system also detects Indian festivals automatically (Diwali +40%, Holi +25%, etc.) and adjusts predictions accordingly.
+The system also detects Indian festivals automatically (Diwali +40%, Holi +25%, Navratri, etc.) and adjusts predictions accordingly.
 
 ---
 
 ## Project Structure
 
-text
-files3/
+```text
+BigMart-Sales-Prediction/
   |
   |-- data/                          <- all 9 CSV files
   |     |-- blinkit_orders.csv
@@ -279,7 +279,7 @@ files3/
   |-- 01_create_tables.sql
   |-- 02_analysis_queries.sql
   +-- requirements.txt
-
+```
 
 ---
 
@@ -322,50 +322,48 @@ files3/
 
 ### 1. Clone the repository
 
-bash
+```bash
 git clone https://github.com/jaydarji2101/BigMart-Sales-Prediction.git
 cd BigMart-Sales-Prediction
-
+```
 
 ### 2. Install dependencies
 
-powershell
+```bash
 pip install pandas numpy matplotlib seaborn scikit-learn streamlit plotly openpyxl
-
+```
 
 ### 3. Create required folders
 
-powershell
-New-Item -ItemType Directory -Force -Path "outputs"
-New-Item -ItemType Directory -Force -Path "charts"
-New-Item -ItemType Directory -Force -Path "models"
-
+```bash
+mkdir outputs charts models
+```
 
 ### 4. Add your CSV files
 
-Place all 9 CSV files inside the data/ folder.
+Place all 9 CSV files inside the `data/` folder.
 
 ### 5. Run the full pipeline
 
-powershell
+```bash
 python 01_data_analysis.py
 python 03_customer_segmentation.py
 python 02_visualizations.py
 python 04_sales_forecast.py
 python 05_decision_system.py
-
+```
 
 ### 6. Launch the dashboard
 
-powershell
+```bash
 streamlit run 06_streamlit_app.py
+```
 
+Open your browser at:
 
-Open browser at:
-
-text
+```text
 http://localhost:8501
-
+```
 
 ---
 
@@ -373,22 +371,22 @@ http://localhost:8501
 
 The Streamlit dashboard supports:
 
-- *Any retail company* — type your company name and it updates everywhere
-- *Business type* — Online (Blinkit/Zepto), Offline (DMart/BigMart), or Both
-- *Full-date forecast* — predicts sales by 15th of the month AND end of month
-- *Festival detection* — auto-detects Diwali, Holi, Navratri and boosts demand prediction
-- *Channel split* — separate forecasts for online orders vs in-store sales
-- *Dataset folder* — type any folder path to load and preview your own CSV files
-- *Recommendations* — white text on colored backgrounds (always readable)
-- *Decision system* — exact stock units, discount %, marketing budget, expected profit
+- **Any retail company** — type your company name and it updates everywhere
+- **Business type** — Online (Blinkit/Zepto), Offline (DMart/BigMart), or Both
+- **Full-date forecast** — predicts sales by the 15th of the month AND end of month
+- **Festival detection** — auto-detects Diwali, Holi, Navratri and boosts demand prediction
+- **Channel split** — separate forecasts for online orders vs in-store sales
+- **Dataset folder** — type any folder path to load and preview your own CSV files
+- **Recommendations** — white text on colored backgrounds (always readable)
+- **Decision system** — exact stock units, discount %, marketing budget, expected profit
 
 ---
 
 ## SQL Analysis
 
-12 business queries in 02_analysis_queries.sql covering:
+12 business queries in `02_analysis_queries.sql` covering:
 
-sql
+```sql
 -- Total revenue
 SELECT SUM(order_total) FROM orders;
 
@@ -404,20 +402,20 @@ GROUP BY product_name ORDER BY revenue DESC LIMIT 10;
 -- Customer segment analysis
 SELECT customer_segment, COUNT(*), AVG(avg_order_value)
 FROM customers GROUP BY customer_segment;
-
+```
 
 ---
 
 ## Roadmap
 
-mermaid
+```mermaid
 flowchart TB
   A["Current Version"] --> B["Time-Series Forecasting\nProphet / ARIMA"]
   B --> C["Real-Time Data\nAPI Integration"]
   C --> D["Geospatial Analysis\nDelivery Zone Heatmaps"]
   D --> E["Recommendation Engine\nCollaborative Filtering"]
   E --> F["Cloud Deployment\nStreamlit Cloud / AWS"]
-
+```
 
 Planned upgrades:
 
@@ -432,8 +430,8 @@ Planned upgrades:
 
 ## Command Center
 
-powershell
-# Full pipeline
+```bash
+# Run full pipeline
 python 01_data_analysis.py
 python 03_customer_segmentation.py
 python 02_visualizations.py
@@ -441,15 +439,15 @@ python 04_sales_forecast.py
 python 05_decision_system.py
 streamlit run 06_streamlit_app.py
 
-# Streamlit only (if model already trained)
+# Launch dashboard only (if model already trained)
 streamlit run 06_streamlit_app.py
-
+```
 
 ---
 
 ## Author
 
-*Jay Darji*
+**Jay Darji**  
 B.E. Information Technology — Apollo Institute of Engineering and Technology, GTU
 
 - GitHub: [jaydarji2101](https://github.com/jaydarji2101)
